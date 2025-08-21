@@ -148,6 +148,7 @@
             this.btn1.TabIndex = 4;
             this.btn1.Text = "1";
             this.btn1.UseVisualStyleBackColor = true;
+            this.btn1.Click += new System.EventHandler(this.numero_click);
             // 
             // btn6
             // 
@@ -273,6 +274,7 @@
             this.btnlimapr.TabIndex = 15;
             this.btnlimapr.Text = "c";
             this.btnlimapr.UseVisualStyleBackColor = true;
+            this.btnlimapr.Click += new System.EventHandler(this.btnlimapr_Click);
             // 
             // txbTela
             // 

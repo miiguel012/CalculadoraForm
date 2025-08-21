@@ -36,16 +36,54 @@ namespace CalculadoraForm
 
         private void btnigual_Click(object sender, EventArgs e)
         {
-            //implementar depois..
+            try
+            {
+                var resultadoObj = new System.Data.DataTable().Compute(txbTela.Text, null);
+
+                double resultado;
+                if (double.TryParse(resultadoObj.ToString(), out resultado))
+                {
+                    if (double.IsInfinity(resultado) || double.IsNaN(resultado))
+                    {
+                        MessageBox.Show("Olá jovem, deu ruim!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        txbTela.Text = "";
+                        operadorClicado = true;
+                        return;
+                    }
+                    else
+                    {
+                        txbTela.Text = resultado.ToString();
+                        operadorClicado = true;
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Expressão inválida!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txbTela.Text = "";
+                    operadorClicado = true;
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Expressão inválida!", "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txbTela.Text = "";
+                operadorClicado = true;
+            }
         }
+   
+
+            //implementar depois..
+        
         private void numero_click(object sender, EventArgs e)
         {
+
             //obter o botao que esta chamando esse evento:
             Button botaoClicado =(Button)sender;
 
             //adicionar o text do botao clicado no textbox;
             txbTela.Text += botaoClicado.Text;
-            //abaixar bandeirinha
+
+            //abaixar bandeirinha:
             operadorClicado = false;
         }
         private void operadro_Click(object sender, EventArgs e)
@@ -65,6 +103,14 @@ namespace CalculadoraForm
             }
 
             
+        }
+
+        private void btnlimapr_Click(object sender, EventArgs e)
+        {
+            //limpar tela
+            txbTela.Text = "";
+            //voltar o operador clicado para true
+            operadorClicado =true ;
         }
     }
 
